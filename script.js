@@ -3,7 +3,7 @@ const yesBtn = document.querySelector('#yes-btn');
 const mainCard = document.querySelector('#main-card');
 const successCard = document.querySelector('#success-card');
 // 👇 NUEVO: Seleccionamos el audio
-const audio = document.querySelector('#celebration-audio');
+const video = document.querySelector('#celebration-video');
 
 // Función para mover el botón "No"
 noBtn.addEventListener('mouseover', () => {
@@ -20,20 +20,8 @@ noBtn.addEventListener('mouseover', () => {
 yesBtn.addEventListener('click', () => {
     mainCard.classList.add('hidden');
     successCard.classList.remove('hidden');
-    
-    // Forzamos al vídeo a estar disponible
-    video.muted = false; 
-    
-    // Usamos una promesa para manejar errores en móviles
-    const playPromise = video.play();
-    
-    if (playPromise !== undefined) {
-        playPromise.catch(error => {
-            console.log("El móvil bloqueó el auto-play, reintentando...");
-            // Plan B: Si falla, intentamos reproducirlo aunque sea sin sonido (o pedimos otro clic)
-            video.muted = true;
-            video.play();
-        });
-    }
+    // 👇 NUEVO: Reproducir la música
+    audio.play();
 });
+
 
