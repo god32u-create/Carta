@@ -20,6 +20,20 @@ noBtn.addEventListener('mouseover', () => {
 yesBtn.addEventListener('click', () => {
     mainCard.classList.add('hidden');
     successCard.classList.remove('hidden');
-    // 👇 NUEVO: Reproducir la música
-    audio.play();
+    
+    // Forzamos al vídeo a estar disponible
+    video.muted = false; 
+    
+    // Usamos una promesa para manejar errores en móviles
+    const playPromise = video.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            console.log("El móvil bloqueó el auto-play, reintentando...");
+            // Plan B: Si falla, intentamos reproducirlo aunque sea sin sonido (o pedimos otro clic)
+            video.muted = true;
+            video.play();
+        });
+    }
 });
+
