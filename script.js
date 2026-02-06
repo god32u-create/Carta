@@ -21,7 +21,8 @@ yesBtn.addEventListener('click', () => {
     mainCard.classList.add('hidden');
     successCard.classList.remove('hidden');
     // 👇 NUEVO: Reproducir la música
+    video.muted = false;
+    video.play();
     audio.play();
 });
-
 
